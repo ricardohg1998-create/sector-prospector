@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+.venv/
+.env
+.env.*
+.runtime/
+work/
+run/
+outputs/
+data/
+*.db
+*.sqlite
+*.sqlite3
+*.csv
+*.xlsx
+sistema_prospeccion/tests/artifacts/

@@ -1,0 +1,31 @@
+{
+  "id": "asetra",
+  "name": "ASETRA Madrid",
+  "adapter": "html_labels",
+  "config": {
+    "adapter": "html_labels",
+    "container_selector": ".entry-content",
+    "label_selector": "div",
+    "labels": {
+      "Nombre comercial": "name",
+      "Domicilio": "address",
+      "Población": "city",
+      "Código postal": "postal_code",
+      "Provincia": "province",
+      "Teléfono": "phone",
+      "Móvil": "mobile",
+      "Email": "email"
+    },
+    "clean": {"strip_prefixes": []},
+    "chain_terms": ["CRESTANEVADA"],
+    "defaults": {"subsector": "mecánica y neumáticos (ASETRA)"}
+  },
+  "discovery": {
+    "link_selector": "a.cl-element-title__anchor",
+    "next_selector": ".next.page-numbers[href]",
+    "allowed_hosts": ["asetramadrid.com"],
+    "allowed_path_prefixes": ["/"],
+    "excluded_path_prefixes": ["/servicios/", "/wp-", "/comunicacion/", "/author/", "/tag/", "/categoria/"],
+    "max_limit": 250
+  }
+}

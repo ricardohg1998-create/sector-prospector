@@ -1,0 +1,28 @@
+{
+  "id": "mitallerdeconfianza",
+  "name": "MiTallerdeconfianza",
+  "adapter": "html_labels",
+  "config": {
+    "adapter": "html_labels",
+    "container_selector": ".list-resume",
+    "label_selector": "div",
+    "labels": {
+      "Dirección:": "address",
+      "Población:": "city",
+      "Teléfono:": "phone",
+      "Móvil:": "mobile",
+      "E-mail:": "email"
+    },
+    "clean": {"strip_prefixes": []},
+    "defaults": {"subsector": "reparación de automóviles (MiTallerdeconfianza)"}
+  },
+  "name_selector": "h1",
+  "discovery": {
+    "link_selector": "#ingredient h2 a[href]",
+    "next_selector": "a[rel=next]",
+    "allowed_hosts": ["mitallerdeconfianza.es", "www.mitallerdeconfianza.es"],
+    "allowed_path_prefixes": ["/"],
+    "excluded_path_prefixes": ["/wp/", "/wp-admin/", "/wp-content/"],
+    "max_limit": 250
+  }
+}

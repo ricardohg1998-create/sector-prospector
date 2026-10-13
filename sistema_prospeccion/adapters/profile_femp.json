@@ -1,0 +1,24 @@
+{
+  "id": "femp",
+  "name": "Red FEMP de talleres",
+  "adapter": "pdf_columns",
+  "config": {
+    "adapter": "pdf_columns",
+    "pages": [4],
+    "min_row_y": 60,
+    "row_number_x_max": 74,
+    "row_number_pattern": "^\\d",
+    "row_y_tolerance": 1.0,
+    "column_x_tolerance": 0.12,
+    "columns": [75.13, 146.89, 186.25, 246.13, 272.89, 401.89, 423.97, 527.17],
+    "fields": ["name", "province", "city", "postal_code", "address", "phone", "email", "source_brand"],
+    "identity_column": 0,
+    "cif_length": 9,
+    "required_column_indices": [0, 1, 2, 3, 4, 5],
+    "skip_incomplete_rows": false,
+    "max_rows": null,
+    "chain_terms": ["EUROMASTER", "FIRST STOP", "STELLANTIS"],
+    "defaults": {"subsector": "reparación mecánica (red FEMP)"}
+  },
+  "discovery": null
+}

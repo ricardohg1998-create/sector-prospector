@@ -1,0 +1,104 @@
+{
+  "id": "belleza-es-fuentes",
+  "name": "Belleza en España: directorios y localizadores revisados",
+  "version": 1,
+  "sector": "peluquerías y centros de belleza para mujeres",
+  "aliases": ["peluquerías", "salones de belleza", "centros de estética", "belleza españa"],
+  "country": "ES",
+  "scope_basis": "Las fuentes directas son directorios/localizadores de peluquería o belleza. Antes de devolver candidatos se aplican filtros literales mantenidos por fuente para actividad médica, academia/proveedor y barbería explícita; identidad incompleta o ambigüedad de sector queda en revisión. El filtro no acredita actividad actual ni independencia.",
+  "publication_basis": "Solo se atribuyen emails visibles en la propia tarjeta, marcador público o bloque de contacto de la ficha. Se conserva fuente y captura; formato público no verifica buzón ni vigencia.",
+  "usage": "Las capturas se procesan offline. Solo business_candidate pasa filtros deterministas; excluded y pending_review incluyen motivo y no se importan como empresas. No hay cualificación por modelo.",
+  "candidate_filters": {
+    "exclude_any": {
+      "actividad médica o clínica": ["clínica", "medicina estética", "centro médico", "médico", "dermatología", "cirugía", "fisioterapia", "odontología", "microinjerto", "injerto capilar"],
+      "academia o proveedor": ["academia", "academy", "escuela", "school", "formación", "distribuidor", "proveedor", "suministro", "laboratorio", "fabricante", "mayorista"],
+      "barbería explícita": ["barbería", "barberia", "barbero", "barbershop", "barber shop"],
+      "público masculino explícito": ["caballeros", "hombres", "masculino", "mens"]
+    }
+  },
+  "sources": [
+    {
+      "id": "club-figaro",
+      "name": "Club Fígaro — asociados",
+      "url": "https://www.clubfigaro.com/elclub/asociados",
+      "source_group": "club-figaro",
+      "role": "discovery",
+      "parser": "figaro_cards",
+      "parser_config": {"row_selector": "div.card", "name_selector": "h6", "address_text_selector": "p"},
+      "defaults": {"country": "ES"},
+      "scope": {"country": "ES", "sector": "peluquerías y centros de belleza para mujeres", "verified": true, "basis": "Asociación española de peluquería; filtros literales deterministas de actividades ajenas aplicados antes de entregar. La identidad con ciudad, teléfono o web puede quedar admitida aunque falte CP."},
+      "publication_verified": true,
+      "publication_basis": "El correo se extrae del texto de la tarjeta guardada junto al nombre y los datos del salón; la URL de captura se conserva como evidencia."
+    },
+    {
+      "id": "skeyndor-timeless",
+      "name": "Skeyndor Timeless Prodigy — centros publicados",
+      "url": "https://timelessprodigy.com/es/donde-comprar/",
+      "source_group": "skeyndor-timeless",
+      "role": "discovery",
+      "parser": "skeyndor_markers",
+      "parser_config": {
+        "payload_regex": "setMarkers\\('((?:\\\\.|[^'\\\\])*)'\\s*\\)",
+        "fields": {"name": "name", "address": "address", "city": "city", "province": "state", "postal_code": "postal_code", "email": "email", "phone": "phone", "website": "website", "subsector": "category"}
+      },
+      "defaults": {"country": "ES"},
+      "scope": {"country": "ES", "sector": "peluquerías y centros de belleza para mujeres", "verified": true, "basis": "Localizador español de centros de belleza; filtros literales de actividad médica, proveedor y barbería explícita. Los casos no resueltos quedan pendientes."},
+      "publication_verified": true,
+      "publication_basis": "Los correos proceden de los objetos públicos setMarkers de la captura guardada del localizador; se conservan URL y hash."
+    },
+    {
+      "id": "localbeauty-discovery",
+      "name": "LocalBeauty — descubrir listados desde portada",
+      "url": "https://localbeauty.es/",
+      "source_group": "localbeauty",
+      "role": "discovery",
+      "parser": "localbeauty_discovery",
+      "parser_config": {"listing_prefixes": ["/es-es/z/peluquerias/", "/es-es/z/centros-de-estetica/"]},
+      "defaults": {"country": "ES"},
+      "scope": {"country": "ES", "sector": "peluquerías y centros de belleza para mujeres", "verified": false, "basis": "La portada solo descubre listados; la URL descubierta debe revisarse y sus fichas aportan candidatos separados."},
+      "publication_verified": false,
+      "publication_basis": ""
+    },
+    {
+      "id": "localbeauty-listados",
+      "name": "LocalBeauty — tarjetas de listados",
+      "url_prefix": "https://localbeauty.es/es-es/z/",
+      "discovery_source_id": "localbeauty-discovery",
+      "source_group": "localbeauty",
+      "role": "discovery",
+      "parser": "localbeauty_cards",
+      "parser_config": {"row_selector": "div.item_item", "name_selector": "h3", "contact_block_prefix": "item_contact_"},
+      "defaults": {"country": "ES"},
+      "verified_path_prefixes": ["/es-es/z/peluquerias/", "/es-es/z/centros-de-estetica/"],
+      "scope": {"country": "ES", "sector": "peluquerías y centros de belleza para mujeres", "verified": true, "basis": "Listado descubierto bajo categorías revisadas de peluquería/estética en la ruta; aplica filtros deterministas de actividades ajenas y permite nombre genérico."},
+      "publication_verified": true,
+      "publication_basis": "Se extrae solo el contacto del bloque item_contact_ de la tarjeta, no recomendaciones ni pie de página."
+    },
+    {
+      "id": "localbeauty-fichas",
+      "name": "LocalBeauty — fichas de negocio",
+      "url_prefix": "https://localbeauty.es/es-es/i/",
+      "discovery_source_id": "localbeauty-listados",
+      "source_group": "localbeauty",
+      "role": "discovery",
+      "parser": "localbeauty_detail",
+      "parser_config": {"name_selector": "h1", "address_selector": ".item-address", "contact_selector": ".item-contact-buttons"},
+      "defaults": {"country": "ES"},
+      "scope": {"country": "ES", "sector": "peluquerías y centros de belleza para mujeres", "verified": true, "basis": "Fichas LocalBeauty con categoría propia o derivadas de un listado sectorial revisado; aplica filtros de actividades ajenas. Si la ficha no tiene categoría ni linaje sectorial queda pendiente."},
+      "publication_verified": true,
+      "publication_basis": "Email obtenido solo de enlaces mailto del bloque propio item-contact-buttons de la ficha."
+    },
+    {
+      "id": "peluquerias-net-sitemap",
+      "name": "Peluquerias.net — sitemap",
+      "url": "https://www.peluquerias.net/sitemap.xml",
+      "source_group": "peluquerias-net",
+      "role": "discovery",
+      "parser": "sitemap",
+      "defaults": {"country": "ES"},
+      "scope": {"country": "ES", "sector": "peluquerías", "verified": false, "basis": "Sitemap útil para descubrir URLs; no acredita actividad ni pertenencia al segmento objetivo."},
+      "publication_verified": false,
+      "publication_basis": ""
+    }
+  ]
+}
