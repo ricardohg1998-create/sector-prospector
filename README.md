@@ -1,6 +1,6 @@
 # Sector Prospector
 
-A Python pipeline I built for sector-based business research and prospecting in Spain. It keeps source evidence, business identity, recipient deduplication and delivery batches separate, so a collected record does not silently become a qualified lead or an email campaign.
+A Python pipeline I built for sector-based business research and prospecting in Spain. It turns source records into a reviewable catalogue, with evidence, business identity, recipient deduplication and resumable delivery batches.
 
 I use the system in my client-research work, including the pharmacy and real-estate projects. This repository publishes the reusable engine and synthetic examples. Real contacts, research captures, CRM state and campaign history are excluded.
 
@@ -62,9 +62,7 @@ For CRM batch creation, provide your own project through `--project-id` or `PROS
 
 Tests use temporary files, fictional businesses and simulated transports. They cover identity, idempotent imports, scope/publication checks, exclusion and reservation state, batches, exports and portable XLSX behaviour. CI runs on Python 3.12/3.13 on Linux and Windows.
 
-The original project also has replay tests against historical captures. Those captures and their dependent replay tests are intentionally excluded from this public extraction. Passing the public suite does not certify a live website parser, Google Maps collection, email deliverability or commercial results.
-
-Source recipes are configurable examples. A source's structure, terms and coverage can change. Publicly listed contact information does not itself demonstrate demand or grant permission for outreach.
+The public suite uses synthetic fixtures; historical capture replays stay in the private workspace. Review source coverage and contact suitability before a live run.
 
 ## Repository map
 
